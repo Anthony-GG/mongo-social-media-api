@@ -10,11 +10,10 @@ const {
 //logic for /api/users, get route and post route delivery
 router.route('/').get(getUsers).post(createUser);
 
-// /api/courses/:courseId NEED TO UPDATE TO USER
+// /api/users/:userID NEED TO UPDATE TO USER
 router
-  .route('/:courseId')
+  .route('/:userID')
   .get(getSingleUser)
-  // .put(updateCourse)
   .delete(deleteUser);
 
 module.exports = router;
