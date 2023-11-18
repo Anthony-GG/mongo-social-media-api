@@ -6,7 +6,7 @@ const {
   deleteStudent,
   addAssignment,
   removeAssignment,
-} = require('../../controllers/studentController');
+} = require('../../controllers/thoughtController.js');
 
 //logic for /api/thoughts, get route and post route delivery
 router.route('/').get(getThoughts).post(createThought);

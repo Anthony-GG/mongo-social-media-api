@@ -5,7 +5,7 @@ const {
   createCourse,
   updateCourse,
   deleteCourse,
-} = require('../../controllers/courseController.js');
+} = require('../../controllers/userController.js');
 
 //logic for /api/users, get route and post route delivery
 router.route('/').get(getUser).post(createUser);
