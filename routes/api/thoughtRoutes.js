@@ -8,16 +8,16 @@ const {
   removeAssignment,
 } = require('../../controllers/studentController');
 
-// /api/students
-router.route('/').get(getStudents).post(createStudent);
+//logic for /api/thoughts, get route and post route delivery
+router.route('/').get(getThoughts).post(createThought);
 
-// /api/students/:studentId
+// /api/students/:studentId UPDATE TO THOUGHTS
 router.route('/:studentId').get(getSingleStudent).delete(deleteStudent);
 
-// /api/students/:studentId/assignments
+// /api/students/:studentId/assignments UPDATE TO THOUGHTS
 router.route('/:studentId/assignments').post(addAssignment);
 
-// /api/students/:studentId/assignments/:assignmentId
+// /api/students/:studentId/assignments/:assignmentId UPDATE TO THOUGHTS
 router.route('/:studentId/assignments/:assignmentId').delete(removeAssignment);
 
 module.exports = router;

@@ -7,10 +7,10 @@ const {
   deleteCourse,
 } = require('../../controllers/courseController.js');
 
-// /api/courses
-router.route('/').get(getCourses).post(createCourse);
+//logic for /api/users, get route and post route delivery
+router.route('/').get(getUser).post(createUser);
 
-// /api/courses/:courseId
+// /api/courses/:courseId NEED TO UPDATE TO USER
 router
   .route('/:courseId')
   .get(getSingleCourse)
