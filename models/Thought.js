@@ -1,5 +1,30 @@
 const { Schema, model } = require('mongoose');
 
+const reactionSchema = new Schema({
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Schema.Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (timestamp) => dateFormat(timestamp),
+    },
+  });
+  
+  function dateFormat(timestamp) {
+    return timestamp.toISOString();
+  }
+
 const thoughtSchema = new Schema(
     {
         thoughtText: {
@@ -28,12 +53,13 @@ const thoughtSchema = new Schema(
       }
     );
 
+
 //Returns - Number of reactions on thought's reaction array
 thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
   });
   
 
-const User = model('User', userSchema);
+const Thought = model('Thought', thoughtSchema);
 
-module.exports = User;
+module.exports = Thought;
