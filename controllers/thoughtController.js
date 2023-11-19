@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
-const { Thought, User } = require('../models');
+const { Thought, } = require('../models');
+const { Reaction } = require('../models/Thought')
 
 // Aggregate function to get the number of thoughts overall
 const thoughtCount = async () => {
@@ -91,6 +92,63 @@ module.exports = {
       res.json({ message: 'Thought successfully deleted' });
     } catch (err) {
       console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  async createReaction(req, res){
+    try {
+      const { thoughtID } = req.params;
+      const { reactionBody, username } = req.body;
+
+      // Use findOneAndUpdate to update the Thought document
+      const thought = await Thought.findOneAndUpdate(
+        { _id: thoughtID },
+        {
+          // Adds the new reaction to the reactions array
+          $push: {
+            reactions: {
+              reactionBody,
+              username,
+            },
+          },
+        },
+        { new: true } // Return the updated document
+      );
+
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought not found' });
+      }
+
+      res.json(thought);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json(err);
+    }
+  },
+  async deleteReaction(req, res){
+    try {
+      const { thoughtID } = req.params;
+      const { reactionID } = req.params;
+
+      // Use findOneAndUpdate to update the Thought document
+      const thought = await Thought.findOneAndUpdate(
+        { _id: thoughtID },
+        {
+          // Adds the new reaction to the reactions array
+          $pull: {
+            reactions: { _id: reactionID },
+          },
+        },
+        { new: true } // Return the updated document
+      );
+
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought not found' });
+      }
+
+      res.json(thought);
+    } catch (err) {
+      console.error(err);
       res.status(500).json(err);
     }
   },
