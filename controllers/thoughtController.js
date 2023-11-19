@@ -98,4 +98,8 @@ module.exports = {
     console.log("Hey reaction, this is test.");
     res.json({message:'This is not a reaction!'})
   },
+  async deleteReaction(req, res){
+    console.log("Hey reaction, this is delete test.");
+    res.json({message:'This is not a deleted reaction!'})
+  },
 };
