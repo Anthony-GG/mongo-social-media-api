@@ -51,7 +51,29 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Delete a user and remove them from the thought
+
+  //Update information about a user
+  async updateUser(req,res){
+    console.log("hi");
+
+    const user = await User.findOneAndUpdate(
+      { _id: req.params.userID }, 
+      {
+        $set:{
+          username: req.body.username,
+          email: req.body.email,
+        }
+      },
+      {new:true}); //updates the info before passing it to be returned to request maker
+
+    if (!user) {
+      return res.status(404).json({ message: 'No user with that ID' })
+    }
+
+    return res.json(user);
+  },
+
+  // Delete a user
   async deleteUser(req, res) {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userID });
