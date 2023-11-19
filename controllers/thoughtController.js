@@ -94,4 +94,8 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  async createReaction(req, res){
+    console.log("Hey reaction, this is test.");
+    res.json({message:'This is not a reaction!'})
+  },
 };
