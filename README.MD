@@ -29,7 +29,7 @@ Once all of those steps have been taken, you should be good to start the server 
 ## Video
 
 ### Here is a link to the video example showcasing the installation and usage of this project:
-[![Watch the video](https://img.youtube.com/vi/GN1C6CTHTRA/maxresdefault.jpg)](https://www.youtube.com/watch?v=GN1C6CTHTRA)
+[![Watch the video](https://img.youtube.com/vi/SHf8bZjRpYc/maxresdefault.jpg)](https://www.youtube.com/watch?v=SHf8bZjRpYc)
 
 ## Mockup
 <div style="text-align:center">
