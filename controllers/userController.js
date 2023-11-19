@@ -54,8 +54,7 @@ module.exports = {
 
   //Update information about a user
   async updateUser(req,res){
-    console.log("hi");
-
+    try{
     const user = await User.findOneAndUpdate(
       { _id: req.params.userID }, 
       {
@@ -71,7 +70,11 @@ module.exports = {
     }
 
     return res.json(user);
-  },
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+},
 
   // Delete a user
   async deleteUser(req, res) {

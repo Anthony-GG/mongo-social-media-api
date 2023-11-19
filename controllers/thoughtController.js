@@ -55,8 +55,8 @@ module.exports = {
 
     //Update information about a user
     async updateThought(req,res){
-      console.log("hi");
   
+      try{
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtID }, 
         {
@@ -73,7 +73,11 @@ module.exports = {
       }
   
       return res.json(thought);
-    },
+     } catch (err){
+      console.log(err);
+      res.status(500).json(err);
+     }
+  },
 
   // Delete a thought and remove them from the user
   async deleteThought(req, res) {
