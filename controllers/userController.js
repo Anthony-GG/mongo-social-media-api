@@ -90,5 +90,63 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  async addFriend(req, res){
+    try {
+        const user = await User.findOneAndUpdate(
+            { _id: req.params.userID },
+            { $addToSet: { friends: req.params.friendID } },
+            { new: true }
+        )
+
+        await User.findOneAndUpdate(
+            { _id: req.params.friendID },
+            { $addToSet: { friends: req.params.userID } },
+            { new: true }
+        )
+
+        if (!user) {
+            return res.status(404).json({ message: 'User does not exist' })
+        }
+
+        res.json({
+            user,
+            message: "Friend added to user and friend's lists."
+        })   
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+  },
+
+  async deleteFriend(req, res){
+    try {
+        const user = await User.findOneAndUpdate(
+            { _id: req.params.userID },
+            { $pull: { friends: req.params.friendID } },
+            { new: true }
+        )
+
+        await User.findOneAndUpdate(
+            { _id: req.params.friendID },
+            { $pull: { friends: req.params.userID } },
+            { new: true }
+        )
+
+        if (!user) {
+            return res.status(404).json({ message: 'User does not exist' })
+        }
+
+        res.json({
+            user,
+            message: "Friend removed from user and friend's lists."
+        })   
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+  },
+  
+
 };
 
