@@ -14,7 +14,8 @@ const reactionSchema = new Schema({
       maxLength: 280,
     },
     username: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     createdAt: {
@@ -43,12 +44,7 @@ const thoughtSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Reaction',
-      },
-    ],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
