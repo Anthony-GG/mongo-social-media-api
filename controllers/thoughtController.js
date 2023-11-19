@@ -28,7 +28,7 @@ module.exports = {
   // Get a single thought
   async getSingleThought(req, res) {
     try {
-      const thought = await Thought.findOne({ _id: req.params.thoughtId })
+      const thought = await Thought.findOne({ _id: req.params.thoughtID })
         .select('-__v');
 
       if (!thought) {
@@ -55,15 +55,15 @@ module.exports = {
   // Delete a thought and remove them from the user
   async deleteThought(req, res) {
     try {
-      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
+      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtID });
 
       if (!thought) {
         return res.status(404).json({ message: 'No such thought exists' });
       }
 
       const user = await User.findOneAndUpdate(
-        { thoughts: req.params.thoughtId },
-        { $pull: { thoughts: req.params.thoughtId } },
+        { thoughts: req.params.thoughtID },
+        { $pull: { thoughts: req.params.thoughtID } },
         { new: true }
       );
 

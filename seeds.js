@@ -66,6 +66,8 @@ db.once('open', async () => {
       thoughtId: thought1User1._id,
     });
 
+
+    //updates the users and saves thoughts pushed
     await user1.save()
     await user2.save()
     await user3.save()
